@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "401771603396",
+    "project_id": "projetointel-1366"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401771603396:android:66ecce2233c7b16c",
+        "android_client_info": {
+          "package_name": "info.androidhive.gcm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXx4IWbRCZpxv7onf2GQ-qKQCYqM4jAL0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
