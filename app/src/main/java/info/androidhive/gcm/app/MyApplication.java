@@ -8,6 +8,7 @@ import android.app.Application;
 import android.content.Intent;
 import android.text.TextUtils;
 
+import com.activeandroid.ActiveAndroid;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -34,6 +35,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        ActiveAndroid.initialize(MyApplication.this);
     }
 
     public static synchronized MyApplication getInstance() {

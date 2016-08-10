@@ -9,38 +9,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import info.androidhive.gcm.R;
-import info.androidhive.gcm.model.ChatRoom;
+import info.androidhive.gcm.model.Alerta;
 
 
 public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<ChatRoom> chatRoomArrayList;
+    private ArrayList<Alerta> alertaArrayList;
     private static String today;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name, message, timestamp, count;
-
+        public CircleImageView thumbnail;
         public ViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.name);
             message = (TextView) view.findViewById(R.id.message);
             timestamp = (TextView) view.findViewById(R.id.timestamp);
             count = (TextView) view.findViewById(R.id.count);
+            thumbnail = (CircleImageView) view.findViewById(R.id.thumbnail);
         }
     }
 
 
-    public ChatRoomsAdapter(Context mContext, ArrayList<ChatRoom> chatRoomArrayList) {
+    public ChatRoomsAdapter(Context mContext, ArrayList<Alerta> chatRoomArrayList) {
         this.mContext = mContext;
-        this.chatRoomArrayList = chatRoomArrayList;
+        this.alertaArrayList = chatRoomArrayList;
 
         Calendar calendar = Calendar.getInstance();
         today = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
@@ -56,22 +60,23 @@ public class ChatRoomsAdapter extends RecyclerView.Adapter<ChatRoomsAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ChatRoom chatRoom = chatRoomArrayList.get(position);
-        holder.name.setText(chatRoom.getName());
-        holder.message.setText(chatRoom.getLastMessage());
-        if (chatRoom.getUnreadCount() > 0) {
-            holder.count.setText(String.valueOf(chatRoom.getUnreadCount()));
-            holder.count.setVisibility(View.VISIBLE);
-        } else {
-            holder.count.setVisibility(View.GONE);
-        }
+        Alerta alerta = alertaArrayList.get(position);
+        holder.name.setText(alerta.getNome());
+        holder.message.setText(alerta.getEmail());
 
-        holder.timestamp.setText(getTimeStamp(chatRoom.getTimestamp()));
+        holder.count.setText("15");
+        holder.count.setVisibility(View.VISIBLE);
+
+        holder.timestamp.setText(getTimeStamp(alerta.getCreateAt()));
+
+        String url = String.format("https://maps.googleapis.com/maps/api/staticmap?center=%s,%s&zoom=12&size=400x400&markers=color:blue|label:P|%s,%s&key=AIzaSyDw21X58Gin5dqvlEh978nyQprBvTlEhiE",
+                alerta.getLatitude(), alerta.getLongitude(), alerta.getLatitude(), alerta.getLongitude());
+        Picasso.with(mContext).load(url).into(holder.thumbnail);
     }
 
     @Override
     public int getItemCount() {
-        return chatRoomArrayList.size();
+        return alertaArrayList.size();
     }
 
     public static String getTimeStamp(String dateStr) {

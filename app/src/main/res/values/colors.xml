@@ -5,4 +5,12 @@
     <color name="colorAccent">#EA80FC</color>
     <color name="list_divider">#dedede</color>
     <color name="bg_bubble_self">#E1E1E1</color>
+
+    <color name="grey_dark">@android:color/darker_gray</color>
+
+    <color name="colorWhiteText">#FFFFFF</color>
+    <color name="colorBlackText">#191919</color>
+    <color name="colorGrayText">#8b000000</color>
+    <color name="white">#f2f2f2</color>
+    <color name="grey_light">#EAEAEA</color>
 </resources>

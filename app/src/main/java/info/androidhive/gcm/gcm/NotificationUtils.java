@@ -17,6 +17,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 
 import java.io.IOException;
@@ -32,10 +33,11 @@ import java.util.List;
 import info.androidhive.gcm.R;
 import info.androidhive.gcm.app.Config;
 import info.androidhive.gcm.app.MyApplication;
+import info.androidhive.gcm.model.Alerta;
 
 
 /**
- * Created by Ravi on 01/06/15.
+ *Created by Ravi on 01/06/15.
  */
 public class NotificationUtils {
 
@@ -51,10 +53,10 @@ public class NotificationUtils {
     }
 
     public void showNotificationMessage(String title, String message, String timeStamp, Intent intent) {
-        showNotificationMessage(title, message, timeStamp, intent, null);
+        showNotificationMessage(null, title, message, timeStamp, intent, null);
     }
 
-    public void showNotificationMessage(final String title, final String message, final String timeStamp, Intent intent, String imageUrl) {
+    public void showNotificationMessage(Alerta alerta, final String title, final String message, final String timeStamp, Intent intent, String imageUrl) {
         // Check for empty push message
         if (TextUtils.isEmpty(message))
             return;
@@ -82,7 +84,7 @@ public class NotificationUtils {
 
             if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
 
-                Bitmap bitmap = getBitmapFromURL(imageUrl);
+                Bitmap bitmap = getBitmapFromURL(alerta, imageUrl);
 
                 if (bitmap != null) {
                     showBigNotification(bitmap, mBuilder, icon, title, message, timeStamp, resultPendingIntent, alarmSound);
@@ -161,7 +163,10 @@ public class NotificationUtils {
      * Downloading push notification image before displaying it in
      * the notification tray
      * */
-    public Bitmap getBitmapFromURL(String strURL) {
+    public Bitmap getBitmapFromURL(Alerta alerta, String strURL) {
+        strURL = String.format("https://maps.googleapis.com/maps/api/staticmap?center=%s,%s&zoom=12&size=400x400&markers=color:blue|label:P|%s,%s&key=AIzaSyDw21X58Gin5dqvlEh978nyQprBvTlEhiE",
+                alerta.getLatitude(), alerta.getLongitude(), alerta.getLatitude(), alerta.getLongitude());
+        Log.d("AQUI", strURL);
         try {
             URL url = new URL(strURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();

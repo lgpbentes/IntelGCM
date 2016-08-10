@@ -1,48 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="16dp"
+    android:layout_height="80dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:background="@drawable/ripple"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/name"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:textColor="#444444"
-        android:textStyle="bold"
-        android:textSize="16dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="10dp">
 
-    <TextView android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/name"
-        android:textColor="#888888"
-        android:layout_marginTop="5dp"
-        android:text="Seems gcm will take some time"/>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.20"
+            android:gravity="start">
 
-    <TextView android:id="@+id/timestamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12:00 AM"
-        android:textSize="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@mipmap/ic_gray_circle"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/colorAccent"/>
 
-    <TextView android:id="@+id/count"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:gravity="center"
-        android:textSize="10dp"
-        android:textColor="@android:color/white"
-        android:layout_below="@id/timestamp"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentRight="true"
-        android:text="5"
-        android:background="@drawable/bg_circle"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_click"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:minHeight="56dp"
+            android:layout_weight="0.65"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/name"
+                android:textColor="@color/colorBlackText"
+                android:layout_width="match_parent"
+                android:textSize="16sp"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:layout_height="wrap_content"
+                android:text="Nome do produto"
+                android:layout_gravity="top"/>
+
+            <TextView
+                android:id="@+id/message"
+                android:textColor="@color/colorGrayText"
+                android:layout_width="match_parent"
+                android:layout_marginTop="5dp"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:layout_height="wrap_content"
+                android:text="3/5 responderam"
+                android:layout_gravity="top"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="0.15"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/notification">
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:textColor="@color/colorGrayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:text="10:20 PM"
+                android:layout_gravity="end"/>
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity= "end"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_circle"
+                android:textSize="10dp"
+                android:text=" 3 "/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorAccent"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
+
+
+
